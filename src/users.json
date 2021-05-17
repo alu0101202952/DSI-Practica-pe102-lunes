@@ -1,0 +1,25 @@
+[{
+        "_id": "609ad3d748fb0b0fb633abd0",
+        "title": "Red note",
+        "body": "This is a red note",
+        "color": "red"
+    },
+    {
+        "_id": "609ad77954f2b61209afbed1",
+        "title": "Blue note",
+        "body": "This is a blue note",
+        "color": "blue"
+    },
+    {
+        "_id": "609ad82519ed6d12864240ea",
+        "title": "Green note",
+        "body": "This is a green note",
+        "color": "green"
+    },
+    {
+        "_id": "609ad9cc2033f513abe183a7",
+        "title": "Yellow note",
+        "body": "This is a yellow note",
+        "color": "yellow"
+    }
+]

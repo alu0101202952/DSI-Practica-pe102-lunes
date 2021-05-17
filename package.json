@@ -1,0 +1,46 @@
+{
+  "name": "practica-pe102",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha",
+    "doc": "typedoc; touch ./docs/.nojekyll",
+    "build": "tsc",
+    "coverage": "nyc npm test && nyc report --reporter=text-lcov",
+    "start": "tsc-watch --onSuccess \"node dist/api-notas/server.js\""
+  },
+  "keywords": [],
+  "author": "Andrea Calero Caro",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chai": "^4.2.15",
+    "@types/inquirer": "^7.3.1",
+    "@types/mocha": "^8.2.1",
+    "@types/mongodb": "^3.6.12",
+    "@types/node": "^14.14.43",
+    "@types/yargs": "^16.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "chai": "^4.3.4",
+    "eslint": "^7.24.0",
+    "eslint-config-google": "^0.14.0",
+    "mocha": "^8.3.2",
+    "nyc": "^15.1.0",
+    "ts-node": "^9.1.1",
+    "tsc-watch": "^4.2.9",
+    "typedoc": "^0.20.36",
+    "yargs": "^17.0.0"
+  },
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "coverage": "^0.4.1",
+    "inquirer": "^6.3.1",
+    "mongodb": "^3.6.6",
+    "mongoose": "^5.12.9"
+  }
+}
