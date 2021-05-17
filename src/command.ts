@@ -2,6 +2,7 @@ import * as yargs from 'yargs';
 import chalk from "chalk";
 import { RequestType, ResponseType } from './types';
 import * as net from 'net';
+import { join } from 'path';
 
 
 function saveUser(user: string) {
@@ -52,39 +53,45 @@ export function addUser(request: RequestType): ResponseType {
  */
 yargs.command({
   command: 'add',
-  describe: 'Add a new note',
+  describe: 'Add a new user',
   builder: {
-    title: {
-      describe: 'Note title',
+    name: {
+      describe: 'User name',
       demandOption: true,
       type: 'string',
     },
-    user: {
-      describe: 'Notes owner',
+    surname: {
+      describe: 'User surname',
       demandOption: true,
       type: 'string',
     },
-    body: {
-      describe: 'Note body',
+    age: {
+      describe: 'User age',
+      demandOption: true,
+      type: 'number',
+    },
+    email: {
+      describe: 'User email',
       demandOption: true,
       type: 'string',
     },
-    color: {
-      describe: 'Note color',
-      demandOption: true,
-      type: 'string',
+    password: {
+        describe: 'User password',
+        demandOption: true,
+        type: 'string',
     },
   },
-  handler(argv) {
-    if (typeof argv.title === 'string' && typeof argv.user === 'string' && typeof argv.body === 'string' && typeof argv.color === 'string') {
-      const color = getTodoColor(argv.color);
-      if(color) {
+  handler(argv: { name: any; surname: any; age: any; email: any; password: any; color: any; user: any; title: any; body: any; }) {
+    if (typeof argv.name === 'string' && typeof argv.surname === 'string' && typeof argv.age === 'number' && typeof argv.email === 'string'  && typeof argv.password === 'string') {
+      const email =argv.email;
+      if(email) {
         const request: RequestType = {
           type: 'add',
-          user: argv.user,
-          title: argv.title,
-          body: argv.body,
-          color: color
+          name: argv.name,
+          surname: argv.surname,
+          age: argv.age,
+          email: argv.email,
+          password: argv.password,
         };
         // cliente conectará al puerto de escucha del servidor
         // y escribirá el .json correspondiente a la nota que se añada
@@ -101,13 +108,13 @@ yargs.command({
         client.on('end', () => {
           const response: ResponseType = JSON.parse(wholeData);
           if(response.success) {
-            console.log(chalk.green('New note added!'));
+            console.log(chalk.green('New user added!'));
           } else {
             console.log(chalk.red('No added...'));
           }
         });
       } else {
-        console.log(chalk.red('Invalid color'));
+        console.log(chalk.red('Invalid email'));
       }
     } else {
       console.log(chalk.red('It is necesary to give all the arguments'));

@@ -8,7 +8,7 @@
  * color: color de la nota definido por los tipos de colores permitidos
  */
 export type RequestType = {
-  type: 'add' | 'update' | 'remove';
+  type: 'add' | 'list' | 'update' | 'remove';
   name: string,
   surname: string,
   age: number,
@@ -23,6 +23,6 @@ export type RequestType = {
  * notes: atributo que tiene las colecciones de notas
  */
 export type ResponseType = {
-  type: 'add' | 'update' | 'remove' | 'error';
+  type: 'add' | 'list' | 'update' | 'remove' | 'error';
   success: boolean;
 }

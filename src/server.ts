@@ -1,6 +1,7 @@
 import * as net from 'net';
 import { RequestType, ResponseType } from './types';
 import { MessageEventEmitterClient } from './eventEmitterClient';
+import { addUser } from './command';
 
 /**
  * Función todoFields, maneja las peticiones y si se introducen correctamente los tipos de atributos
@@ -41,10 +42,10 @@ function todoFields(request: RequestType, checkName: boolean, checkSurname: bool
  * localizador de errores
  */
 function processRequest(request: RequestType): ResponseType {
-  if (typeof request.type === 'string' && typeof request.user === 'string') {
+  if (typeof request.type === 'string' && typeof request.email === 'string') {
     if (request.type == 'add') {
-        if (todoFields(request, true, true, true)) {
-          return addTodo(request);
+        if (todoFields(request, true, true, true, true, true)) {
+          return addUser(request);
         } else {
           return { type: 'error', success: false};
         }

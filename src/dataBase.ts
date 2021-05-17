@@ -1,8 +1,12 @@
+
 import {MongoClient} from 'mongodb';
 
 const dbURL = 'mongodb://127.0.0.1:27017';
-const dbName = 'users';
+const dbName = 'dsi-assessment';
 
+function insertEmail(email: string) {
+    email=email;
+}
 interface UserInterface {
   name: string,
   surname: string,
@@ -11,6 +15,11 @@ interface UserInterface {
   password: string,
 }
 
+ObjectEmail = insertEmail("jperez@ull.edu.es")
+
+/**
+ * Crear usuario
+ */
 MongoClient.connect(dbURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -27,9 +36,9 @@ MongoClient.connect(dbURL, {
     },
     {
         name: 'Juan',
-        surname: 'Gonzalez',
-        age: 34,
-        email: 'juang@ull.edu.es', 
+        surname: 'Perez',
+        age: 22,
+        email: 'jperez@ull.edu.es', 
         password: 'job'
     },
   ]);
@@ -38,3 +47,53 @@ MongoClient.connect(dbURL, {
 }).catch((error) => {
   console.log(error);
 });
+
+/**
+ * Buscar usuario
+ */
+MongoClient.connect(dbURL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }).then((client) => {
+    const db = client.db(dbName);
+  
+    return db.collection<UserInterface>('users').find({
+      email: 'alu0101202952@ull.edu.es',
+    }).toArray();
+  }).then((result) => {
+    console.log(result);
+  }).catch((error) => {
+    console.log(error);
+  });
+
+
+/**
+ * Actualizar un usuario teniendo en cuenta el email como identificador
+ */
+MongoClient.connect(dbURL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}).then((client) => {
+  const db = client.db(dbName);
+
+  return db.collection<UserInterface>('notes').updateOne({
+    email_: new ObjectEmail('jperez@ull.edu.es'),
+  }, {
+    // Cambia la contraseña de job a love
+    $set: {
+        name: 'Juan',
+        surname: 'Perez',
+        age: 22,
+        email: 'jperez@ull.edu.es', 
+        password: 'love'
+    },
+  });
+}).then((result) => {
+  console.log(result.modifiedCount);
+}).catch((error) => {
+  console.log(error);
+});
+
+
+
+
